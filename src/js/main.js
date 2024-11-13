@@ -1,3 +1,8 @@
 import WeatherApi from "./api/WeatherApi";
-let weather = new WeatherApi('london',`http://api.openweathermap.org/geo/1.0/direct?q=${this.term}&limit=5&appid=${key}`);
-console.log(weather.ajaxService())
+import TemperatureUtils from "./utils/TemperatureUtils";
+import renderCard from "./modules/renderCard";
+//let weather = new WeatherApi('london','GB');
+//weather.getTemperature().then(result => console.log(result))
+//let temp = new TemperatureUtils('london',"GB");
+//console.log(temp.getCelciusTemperature())
+renderCard();
