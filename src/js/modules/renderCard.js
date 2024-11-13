@@ -5,10 +5,16 @@ const renderCard = () =>{
         e.preventDefault();
         const cityInput = document.querySelector('.card__input--city');
         const countryInput = document.querySelector('.card__input--country');
+        if(localStorage.getItem(cityInput.value+countryInput.value)){
+            document.querySelector('.card__body').innerHTML = "";
+            document.querySelector('.card__body').appendChild(weatherCard(cityInput.value, localStorage.getItem(cityInput.value+countryInput.value) ));
+        }
+        else{
         weatherService(cityInput.value,countryInput.value).then(emoji=>{
-            console.log(`${emoji} + hi`);
+            document.querySelector('.card__body').innerHTML = "";
             document.querySelector('.card__body').appendChild(weatherCard(cityInput.value, emoji));
+            localStorage.setItem(cityInput.value+countryInput.value, emoji)
     })
-    })
+    }})
 }
 export default renderCard

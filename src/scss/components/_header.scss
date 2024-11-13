@@ -2,5 +2,19 @@ header{
     .container{
         background-color: #3E362E;
         height:50px;
-    }
-}
+        display:grid;
+        place-items: center;
+        grid-template-columns: 1fr 1fr 1fr;
+        .card{
+            grid-column-start: 2;
+            .card__btn{
+                background-color: rgb(143, 143, 221);
+                border-radius: 0.5em;
+                color:#ffffff;
+                font-weight: 800;
+                font-family: 'Gill Sans', sans-serif;
+            }
+            }
+
+        }
+     }

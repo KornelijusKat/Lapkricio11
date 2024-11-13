@@ -25,7 +25,8 @@ var WeatherApi = /*#__PURE__*/function () {
     _classCallCheck(this, WeatherApi);
     this.cityName = cityName;
     this.countryCode = countryCode;
-    this.key = 'fdf2b36efb14a784acff8e5979be8adc';
+    //Insert key
+    this.key = '';
   }
   return _createClass(WeatherApi, [{
     key: "getGeoLocation",
@@ -65,17 +66,9 @@ var WeatherApi = /*#__PURE__*/function () {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_WeatherApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api/WeatherApi */ "./src/js/api/WeatherApi.js");
-/* harmony import */ var _utils_TemperatureUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/TemperatureUtils */ "./src/js/utils/TemperatureUtils.js");
-/* harmony import */ var _modules_renderCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/renderCard */ "./src/js/modules/renderCard.js");
+/* harmony import */ var _modules_renderCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/renderCard */ "./src/js/modules/renderCard.js");
 
-
-
-//let weather = new WeatherApi('london','GB');
-//weather.getTemperature().then(result => console.log(result))
-//let temp = new TemperatureUtils('london',"GB");
-//console.log(temp.getCelciusTemperature())
-(0,_modules_renderCard__WEBPACK_IMPORTED_MODULE_2__["default"])();
+(0,_modules_renderCard__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
 /***/ }),
 
@@ -122,10 +115,16 @@ var renderCard = function renderCard() {
     e.preventDefault();
     var cityInput = document.querySelector('.card__input--city');
     var countryInput = document.querySelector('.card__input--country');
-    (0,_weatherService__WEBPACK_IMPORTED_MODULE_0__["default"])(cityInput.value, countryInput.value).then(function (emoji) {
-      console.log("".concat(emoji, " + hi"));
-      document.querySelector('.card__body').appendChild((0,_weatherCard__WEBPACK_IMPORTED_MODULE_1__["default"])(cityInput.value, emoji));
-    });
+    if (localStorage.getItem(cityInput.value + countryInput.value)) {
+      document.querySelector('.card__body').innerHTML = "";
+      document.querySelector('.card__body').appendChild((0,_weatherCard__WEBPACK_IMPORTED_MODULE_1__["default"])(cityInput.value, localStorage.getItem(cityInput.value + countryInput.value)));
+    } else {
+      (0,_weatherService__WEBPACK_IMPORTED_MODULE_0__["default"])(cityInput.value, countryInput.value).then(function (emoji) {
+        document.querySelector('.card__body').innerHTML = "";
+        document.querySelector('.card__body').appendChild((0,_weatherCard__WEBPACK_IMPORTED_MODULE_1__["default"])(cityInput.value, emoji));
+        localStorage.setItem(cityInput.value + countryInput.value, emoji);
+      });
+    }
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderCard);
@@ -176,11 +175,6 @@ var weatherService = function weatherService(city, countryCode) {
     var emoji = new _ui_EmojiUI__WEBPACK_IMPORTED_MODULE_0__["default"](temperature);
     return emoji.showEmoji();
   });
-  //let temp = new TemperatureUtils(city,countryCode);
-  // const temperature = temp.getCelciusTemperature()
-  //console.log(temp.getCelciusTemperature());
-  // let emoji = new EmojiUI(temperature);
-  //return emoji.showEmoji();
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (weatherService);
 
@@ -217,11 +211,6 @@ var EmojiUI = /*#__PURE__*/function () {
         return "\u2600\uFE0F ".concat(this.temperature, "\xB0C");
       }
     }
-  }, {
-    key: "renderUI",
-    value: function renderUI() {
-      this.showEmoji();
-    }
   }]);
 }();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmojiUI);
@@ -238,14 +227,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _api_WeatherApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/WeatherApi */ "./src/js/api/WeatherApi.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-
 var TemperatureUtils = /*#__PURE__*/function () {
   function TemperatureUtils(city, countryCode, kelvin) {
     _classCallCheck(this, TemperatureUtils);

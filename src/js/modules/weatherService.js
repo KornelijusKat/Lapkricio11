@@ -10,10 +10,5 @@ const weatherService = (city, countryCode) => {
         let emoji = new EmojiUI(temperature);
         return emoji.showEmoji();
     })
-    //let temp = new TemperatureUtils(city,countryCode);
-   // const temperature = temp.getCelciusTemperature()
-    //console.log(temp.getCelciusTemperature());
-   // let emoji = new EmojiUI(temperature);
-    //return emoji.showEmoji();
 }
 export default weatherService

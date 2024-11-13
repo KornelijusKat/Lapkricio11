@@ -13,8 +13,5 @@ class EmojiUI{
             return `☀️ ${this.temperature}°C`
         }
     }
-    renderUI(){
-        this.showEmoji()
-    }
 }
 export default EmojiUI

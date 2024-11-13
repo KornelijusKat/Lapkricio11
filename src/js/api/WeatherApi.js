@@ -3,7 +3,8 @@ class WeatherApi{
     constructor(cityName, countryCode){
         this.cityName = cityName;
         this.countryCode = countryCode;
-        this.key = 'fdf2b36efb14a784acff8e5979be8adc';
+        //Insert key
+        this.key = '';
     }
     getGeoLocation(){
         const uri = `http://api.openweathermap.org/geo/1.0/direct?q=${this.cityName},${this.countryCode}&limit=1&appid=${this.key}`

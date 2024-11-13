@@ -1,4 +1,3 @@
-import WeatherApi from "../api/WeatherApi";
 class TemperatureUtils{
     constructor(city, countryCode, kelvin){
         this.city = city,

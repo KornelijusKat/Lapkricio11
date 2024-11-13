@@ -1,9 +1,53 @@
 header .container {
   background-color: #3E362E;
   height: 50px;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+header .container .card {
+  grid-column-start: 2;
+}
+header .container .card .card__btn {
+  background-color: rgb(143, 143, 221);
+  border-radius: 0.5em;
+  color: #ffffff;
+  font-weight: 800;
+  font-family: "Gill Sans", sans-serif;
 }
 
 body {
   margin: 0 auto;
   padding: 0 auto;
+  height: 100vh;
+  background-color: #766969;
+}
+
+main {
+  height: 90%;
+}
+main .container {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+main .container .card__weatherDiv {
+  width: 200px;
+  padding: 20px;
+  background-color: #f0f8ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+main .container .card__weatherDiv .card__weatherDiv h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+main .container .card__weatherDiv .card__weatherDiv p {
+  font-size: 2rem;
+  margin: 10px 0 0;
 }
